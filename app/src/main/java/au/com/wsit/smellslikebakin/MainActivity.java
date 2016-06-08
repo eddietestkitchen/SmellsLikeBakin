@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity
     public static final String LIST_FRAGMENT = "list_fragment";
     public static final String VIEWPAGER_FRAGMENT = "viewpager_fragment";
     private static final String TAG = MainActivity.class.getSimpleName();
+    boolean isTablet;
 
 
     @Override
@@ -25,7 +26,15 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        boolean isTablet = getResources().getBoolean(R.bool.is_tablet);
+        try
+        {
+            isTablet = getResources().getBoolean(R.bool.is_tablet);
+        }
+        catch(Exception e)
+        {
+            isTablet = false;
+        }
+
         Toast.makeText(MainActivity.this, isTablet + " ", Toast.LENGTH_LONG).show();
 
         if(!isTablet)
