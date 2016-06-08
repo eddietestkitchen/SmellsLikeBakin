@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity
             isTablet = false;
         }
 
-        Toast.makeText(MainActivity.this, isTablet + " ", Toast.LENGTH_LONG).show();
-
         if(!isTablet)
         {
             ListFragment savedFragment = (ListFragment) getSupportFragmentManager()
@@ -93,6 +91,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onGridRecipeSelected(int index)
     {
-
+        DualPaneFragment fragment = new DualPaneFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ViewPagerFragment.KEY_RECIPE_INDEX, index);
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeHolder, fragment, VIEWPAGER_FRAGMENT);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
